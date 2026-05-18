@@ -1,0 +1,21 @@
+CompileFlags:
+  Add:
+    - -x
+    - cuda
+    - --cuda-gpu-arch=sm_120
+    - --cuda-path=/usr/local/cuda
+    - -I/home/arpiku/cutlass/include
+    - -I/home/arpiku/cutlass/util/include
+    - -I/home/arpiku/cutlass/examples
+---
+If:
+  PathMatch: .*\.cu
+CompileFlags:
+  Add:
+    - -x
+    - cuda
+    - --cuda-gpu-arch=sm_120
+    - --cuda-path=/usr/local/cuda
+    - -I/home/arpiku/cutlass/include
+    - -I/home/arpiku/cutlass/util/include
+    - -I/home/arpiku/cutlass/examples

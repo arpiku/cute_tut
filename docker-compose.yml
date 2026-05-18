@@ -1,0 +1,21 @@
+services:
+  cutlass-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cutlass-cuda128-dev:latest
+    container_name: cutlass-cuda128-dev
+    user: "1000:1000"
+    working_dir: /workspace/dev-setup
+    stdin_open: true
+    tty: true
+    gpus: all
+    environment:
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      CUDA_HOME: /usr/local/cuda
+      CC: gcc-14
+      CXX: g++-14
+    volumes:
+      - /home/arpiku/cutlass:/workspace/cutlass:ro
+      - .:/workspace/dev-setup
+    command: bash
