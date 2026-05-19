@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.18)  18 MAY 2026 10:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.18)  19 MAY 2026 14:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**out.tex
-(./out.tex
+**row_major_30x10.tex
+(./row_major_30x10.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/share/texmf-dist/tex/latex/standalone/standalone.cls
@@ -57,16 +57,17 @@ File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \bibindent=\dimen148
 )
 \sa@box=\box53
-runsystem(pdflatex  -shell-escape   -jobname 'out' '\expandafter\def\csname sa@
-internal@run\endcsname{1}\input{out}')...disabled (restricted).
+runsystem(pdflatex  -shell-escape   -jobname 'row_major_30x10' '\expandafter\de
+f\csname sa@internal@run\endcsname{1}\input{row_major_30x10}')...disabled (rest
+ricted).
 
 
 Executing command:
-gs -dSAFER -dBATCH -dNOPAUSE  -sDEVICE=png16m -r300 -sOutputFile=out.png out.pd
-f
+gs -dSAFER -dBATCH -dNOPAUSE  -sDEVICE=png16m -r300 -sOutputFile=row_major_30x1
+0.png row_major_30x10.pdf
 
-runsystem(gs -dSAFER -dBATCH -dNOPAUSE  -sDEVICE=png16m -r300 -sOutputFile=out.
-png out.pdf)...disabled (restricted).
+runsystem(gs -dSAFER -dBATCH -dNOPAUSE  -sDEVICE=png16m -r300 -sOutputFile=row_
+major_30x10.png row_major_30x10.pdf)...disabled (restricted).
 
 
 Class standalone Warning: Conversion failed! Please ensure that shell escape
@@ -356,8 +357,8 @@ File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count307
 )
-No file out.aux.
-\openout1 = `out.aux'.
+No file row_major_30x10.aux.
+\openout1 = `row_major_30x10.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
@@ -398,24 +399,24 @@ e
 
 
 Non-PDF special ignored!
-<special> papersize=114.21097pt,85.75822pt
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./out.aux)
+<special> papersize=313.38017pt,882.43504pt
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./row_major_30x10.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 12399 strings out of 469515
- 256787 string characters out of 5470807
- 631227 words of memory out of 5000000
- 40862 multiletter control sequences out of 15000+600000
+ 12403 strings out of 469515
+ 257025 string characters out of 5470807
+ 831905 words of memory out of 5000000
+ 40866 multiletter control sequences out of 15000+600000
  628188 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 102i,7n,107p,384b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,7n,107p,396b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on out.pdf (1 page, 14573 bytes).
+Output written on row_major_30x10.pdf (1 page, 25813 bytes).
 PDF statistics:
  21 PDF objects out of 1000 (max. 8388607)
  13 compressed objects within 1 object stream
