@@ -270,22 +270,42 @@ int main() {
 
    std::cout << "Layout l1_l2 = "  << l1_l2 << "\n";
 
+   auto s0 = make_shape(Int<4>{}, make_shape(Int<3>{}, Int<2>{}));
+   // auto d0 = make_stride(Int<4>{}, make_stride(Int<3>{}, Int<1>{}));
+   auto lc = make_layout(s0, LayoutLeft());
+   auto lr = make_layout(s0, LayoutRight());
 
-   print_latex_to_file("l1_l2.tex", l1_l2);
 
-   std::cout << "crd l1 = "  << crd2idx(1, l1) << "\n";
-   std::cout << "idx l1 = "  << idx2crd(1, l1) << "\n";
-   std::cout << "idx l1 = "  << idx2crd(2, l1) << "\n";
+   std::cout << "Layout lc = "  << lc << "\n";
+   std::cout << "Layout lr = "  << lr << "\n";
+   print_latex_to_file("lc.tex", lc);
+   print_latex_to_file("lr.tex", lr);
 
-   for (int i = 0; i < 10; ++i) {
-       std::cout << "(crd2idx, idx2crd) = " << crd2idx(i, l1) << ", " << idx2crd(i, l1) << "\n";
-       std::cout << " (i+1)(crd2idx, idx2crd) = " << crd2idx(i+1, l1) << ", " << idx2crd(i+1, l1) << "\n";
+   for (int i = 0; i < cute::size(lc); ++i) {
+           std::cout << "(idx2crd), lc, lr = " << idx2crd(i, lc) << ", " << idx2crd(i, lr) << "\n";
+
    }
 
-   std::cout << crd2idx(make_coord(0,2), l1_l2) << "\n";
-   std::cout << crd2idx(make_coord(0,2), l2) << "\n";
-   std::cout << crd2idx(make_coord(1,0), l1_l2) << "\n";
-   std::cout << crd2idx(make_coord(1,0), l2) << "\n";
+   for (int i = 0; i < cute::size<0>(s0); ++i) {
+       for (int j = 0; j < cute::size<1>(s0); ++j) {
+           std::cout << "(i,j) = " << i << ", " << j << "\n";
+           std::cout << "(crd2idx), lc, lr = " << crd2idx(make_coord(i,j), lc) << ", " << crd2idx(make_coord(i,j), lr) << "\n";
+   }
+   }
+
+   // std::cout << "crd l1 = "  << crd2idx(1, l1) << "\n";
+   // std::cout << "idx l1 = "  << idx2crd(1, l1) << "\n";
+   // std::cout << "idx l1 = "  << idx2crd(2, l1) << "\n";
+
+   // for (int i = 0; i < 10; ++i) {
+   //     std::cout << "(crd2idx, idx2crd) = " << crd2idx(i, l1) << ", " << idx2crd(i, l1) << "\n";
+   //     std::cout << " (i+1)(crd2idx, idx2crd) = " << crd2idx(i+1, l1) << ", " << idx2crd(i+1 l1) << "\n";
+   // }
+
+   // std::cout << crd2idx(make_coord(0,2), l1_l2) << "\n";
+   // std::cout << crd2idx(make_coord(0,2), l2) << "\n";
+   // std::cout << crd2idx(make_coord(1,0), l1_l2) << "\n";
+   // std::cout << crd2idx(make_coord(1,0), l2) << "\n";
 
 
 
