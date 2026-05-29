@@ -1,0 +1,34 @@
+% Layout: (_3,_5):(_3,_9)
+\documentclass[convert]{standalone}
+\usepackage{tikz}
+
+\begin{document}
+\begin{tikzpicture}[x={(0cm,-1cm)},y={(1cm,0cm)},every node/.style={minimum size=1cm, outer sep=0pt}]
+
+\node[fill=black!00] at (0,0) {0};
+\node[fill=black!40] at (0,1) {9};
+\node[fill=black!20] at (0,2) {18};
+\node[fill=black!60] at (0,3) {27};
+\node[fill=black!10] at (0,4) {36};
+\node[fill=black!60] at (1,0) {3};
+\node[fill=black!10] at (1,1) {12};
+\node[fill=black!50] at (1,2) {21};
+\node[fill=black!30] at (1,3) {30};
+\node[fill=black!70] at (1,4) {39};
+\node[fill=black!30] at (2,0) {6};
+\node[fill=black!70] at (2,1) {15};
+\node[fill=black!00] at (2,2) {24};
+\node[fill=black!40] at (2,3) {33};
+\node[fill=black!20] at (2,4) {42};
+\draw[color=black,thick,shift={(-0.5,-0.5)}] (0,0) grid (3,5);
+
+\node at (0,-1) {\Large{\texttt{0}}};
+\node at (1,-1) {\Large{\texttt{1}}};
+\node at (2,-1) {\Large{\texttt{2}}};
+\node at (-1,0) {\Large{\texttt{0}}};
+\node at (-1,1) {\Large{\texttt{1}}};
+\node at (-1,2) {\Large{\texttt{2}}};
+\node at (-1,3) {\Large{\texttt{3}}};
+\node at (-1,4) {\Large{\texttt{4}}};
+\end{tikzpicture}
+\end{document}

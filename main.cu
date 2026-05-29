@@ -242,48 +242,97 @@ int main() {
     auto c = make_layout(_2{}, _7{});
 
     std::cout << "a : " << a << std::endl;
-    check_print(print_latex_to_file("a.tex", a));
-
     std::cout << "b : " << b << std::endl;
-    check_print(print_latex_to_file("b.tex", b));
-
     std::cout << "c : " << c << std::endl;
-    check_print(print_latex_to_file("c.tex", c));
 
-    // auto ab = make_layout(a, b);
-    // auto bc = make_layout(b, c);
+    auto ab = make_layout(a,b);
 
 
-    auto cb = make_layout(c, b);
-    auto cb_a = make_layout(cb, a);
-    auto _l2x2lx2_pr = make_layout(make_shape(_2x2_, _2{}), make_stride(make_tuple(_7{}, _5{}), Int<3>{}));
 
-    std::cout << "cb : " << cb << std::endl;
-    check_print(print_latex_to_file("cb.tex", cb));
-    std::cout << "cb_a : " << cb_a << std::endl;
-    check_print(print_latex_to_file("cb_a.tex", cb_a));
-    std::cout << "_l2x2lx2_pr  : " << _l2x2lx2_pr << std::endl;
-    check_print(print_latex_to_file("_l2x2lx2_pr.tex", _l2x2lx2_pr));
+    auto p_c = make_layout(make_shape(_3{}, _5{}), make_stride(_1{}, _3{}));
+    auto p_r = make_layout(make_shape(_3{}, _5{}), make_stride(_5{}, _1{}));
 
-    auto ba = make_layout(b, a);
-    auto c_ba = make_layout(c, ba);
-    auto _2xl2x2l_pr = make_layout(make_shape( _2{}, _2x2_), make_stride(_7{}, make_tuple(_5{}, Int<3>{})));
+    auto c_p = make_layout(make_shape(_5{}, _3{}), make_stride(_1{}, _5{}));
+    auto r_p = make_layout(make_shape(_5{}, _3{}), make_stride(_3{}, _1{}));
 
-    std::cout << "ba : " << ba << std::endl;
-    check_print(print_latex_to_file("ba.tex", ba));
-    std::cout << "c_ba : " << c_ba << std::endl;
-    check_print(print_latex_to_file("c_ba.tex", c_ba));
-    std::cout << "_2xl2x2l_pr  : " << _2xl2x2l_pr  << std::endl;
-    check_print(print_latex_to_file("_2xl2x2l_pr.tex", _2xl2x2l_pr));
 
-    auto coal_2x2X2x2_c_s1x1 = coalesce(_2x2X2x2_c, Step<_1, _1>{});
-    auto coal_2x2X2x2_c_sl1x1lx1 = coalesce(_2x2X2x2_c, Step<Step<X,X>, _1>{});
-    auto coal_2x2X2x2_c_sl1x1lxl1x1l = coalesce(_2x2X2x2_c, Step<Step<X,X>, Step<X,X>>{});
-    // auto coal_2x2X2x2_c_sl1x1lx1 = coalesce(_2x2X2x2_c, Step<Step<_1,_1>, _1>{});
-    // auto coal_b = coalesce(_2x2X2x2_c, Step<Step<_1,_1>, Step<_1,_1>>);
-    std::cout << "coal_a : " << coal_2x2X2x2_c_s1x1  << std::endl;
-    std::cout << "coal_b : " << coal_2x2X2x2_c_sl1x1lx1 << std::endl;
-    std::cout << "coal_c : " << coal_2x2X2x2_c_sl1x1lxl1x1l  << std::endl;
+    std::cout << "p_c : " << p_c << std::endl;
+    check_print(print_latex_to_file("p_c.tex", p_c));
+
+    std::cout << "p_r : " << p_r << std::endl;
+    check_print(print_latex_to_file("p_r.tex", p_r));
+
+    std::cout << "c_p : " << c_p << std::endl;
+    check_print(print_latex_to_file("c_p.tex", c_p));
+
+    std::cout << "r_p : " << r_p << std::endl;
+    check_print(print_latex_to_file("r_p.tex", r_p));
+
+    auto p_cOc_p = composition(p_c, c_p);
+    auto c_pOp_c = composition(c_p, p_c);
+
+    auto p_rOp_c = composition(p_r, p_c);
+    std::cout << "p_rOp_c : " << p_rOp_c  << std::endl;
+    check_print(print_latex_to_file("p_rOp_c.tex", p_rOp_c  ));
+
+    auto jjk = composition(p_c, _4x4_p);
+    std::cout << "jjk : " << jjk  << std::endl;
+    check_print(print_latex_to_file("jjk.tex", jjk  ));
+
+
+    auto aOp_c = composition(a, p_c);
+    std::cout << "aOp_c : " << aOp_c << std::endl;
+    check_print(print_latex_to_file("aOp_c.tex", aOp_c));
+
+
+    std::cout << "p_cOc_p : " << p_cOc_p << std::endl;
+    check_print(print_latex_to_file("p_cOc_p.tex", p_cOc_p));
+
+    std::cout << "c_pOp_c : " << c_pOp_c  << std::endl;
+    check_print(print_latex_to_file("c_pOp_c.tex", p_cOc_p));
+
+    auto axa = logical_product(a, a);
+    std::cout << "axa : " << axa << std::endl;
+
+    auto tiled_axa = tiled_product(a, a);
+    std::cout << "tiled_axa : " << tiled_axa << std::endl;
+
+
+    auto axaxa = logical_product(axa, a);
+    std::cout << "axaxa : " << axaxa << std::endl;
+
+    auto tiled_axaxa = tiled_product(axa, a);
+    std::cout << "tiled_axaxa : " << tiled_axaxa << std::endl;
+
+    auto gg = coalesce(axaxa);
+    std::cout << "gg : " << gg << std::endl;
+
+    auto tiled_gg = coalesce(axaxa);
+    std::cout << "tiled_gg : " << tiled_gg << std::endl;
+
+    // auto coal_2x2X2x2_r = coalesce(_2x2X2x2_r);
+    // auto coal_2x2X2x2_r_s1x1 = coalesce(_2x2X2x2_r, Step<_1, _1>{});
+    // auto coal_2x2X2x2_r_sl1x1lx1 = coalesce(_2x2X2x2_r, Step<Step<X,X>, _1>{});
+    // auto coal_2x2X2x2_r_sl1x1lxl1x1l = coalesce(_2x2X2x2_r, Step<Step<X,X>, Step<X,X>>{});
+
+    // std::cout << "coal_2x2X2x2_r : " << coal_2x2X2x2_r  << std::endl;
+    // // check_print(print_latex_to_file("coal_2x2X2x2_r.tex", coal_2x2X2x2_r));
+
+    // std::cout << "coal_2x2X2x2_r_s1x1 : " << coal_2x2X2x2_r_s1x1  << std::endl;
+    // check_print(print_latex_to_file("coal_2x2X2x2_r_s1x1.tex", coal_2x2X2x2_r_s1x1));
+
+    // std::cout << "coal_2x2X2x2_r_sl1x1lx1.tex : " << coal_2x2X2x2_r_sl1x1lx1 << std::endl;
+    // check_print(print_latex_to_file("coal_2x2X2x2_r_sl1x1lx1.tex", coal_2x2X2x2_r_sl1x1lx1));
+
+    // std::cout << "coal_2x2X2x2_r_sl1x1lxl1x1l : " << coal_2x2X2x2_r_sl1x1lxl1x1l  << std::endl;
+    // check_print(print_latex_to_file("coal_2x2X2x2_r_sl1x1lxl1x1l.tex", coal_2x2X2x2_r_sl1x1lxl1x1l));
+
+
+    // std::cout << "_4x4_r : " << _4x4_r << std::endl;
+    // check_print(print_latex_to_file("_4x4_r.tex", _4x4_r));
+
+    // std::cout << "_2x2X2x2_c : " << _2x2X2x2_c << std::endl;
+    // check_print(print_latex_to_file("_2x2X2x2_c.tex", _2x2X2x2_c));
 
 
 
