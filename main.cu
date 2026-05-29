@@ -237,9 +237,93 @@ int main() {
     auto _l2x2lx2_pc = make_layout(make_shape(_2x2_, _2{}), make_stride(make_tuple(_3{}, _5{}), Int<7>{}));
     auto _2xl2x2l_pc = make_layout(make_shape( _2{}, _2x2_), make_stride(_3{}, make_tuple(_5{}, Int<7>{})));
 
+    auto a = make_layout(_2{}, _3{});
+    auto b = make_layout(_2{}, _5{});
+    auto c = make_layout(_2{}, _7{});
 
-    std::cout << "_4x4_c : " << _4x4_c << std::endl;
-    check_print(print_latex_to_file("_4x4_c.tex", _4x4_c));
+    std::cout << "a : " << a << std::endl;
+    check_print(print_latex_to_file("a.tex", a));
+
+    std::cout << "b : " << b << std::endl;
+    check_print(print_latex_to_file("b.tex", b));
+
+    std::cout << "c : " << c << std::endl;
+    check_print(print_latex_to_file("c.tex", c));
+
+    // auto ab = make_layout(a, b);
+    // auto bc = make_layout(b, c);
+
+
+    auto cb = make_layout(c, b);
+    auto cb_a = make_layout(cb, a);
+    auto _l2x2lx2_pr = make_layout(make_shape(_2x2_, _2{}), make_stride(make_tuple(_7{}, _5{}), Int<3>{}));
+
+    std::cout << "cb : " << cb << std::endl;
+    check_print(print_latex_to_file("cb.tex", cb));
+    std::cout << "cb_a : " << cb_a << std::endl;
+    check_print(print_latex_to_file("cb_a.tex", cb_a));
+    std::cout << "_l2x2lx2_pr  : " << _l2x2lx2_pr << std::endl;
+    check_print(print_latex_to_file("_l2x2lx2_pr.tex", _l2x2lx2_pr));
+
+    auto ba = make_layout(b, a);
+    auto c_ba = make_layout(c, ba);
+    auto _2xl2x2l_pr = make_layout(make_shape( _2{}, _2x2_), make_stride(_7{}, make_tuple(_5{}, Int<3>{})));
+
+    std::cout << "ba : " << ba << std::endl;
+    check_print(print_latex_to_file("ba.tex", ba));
+    std::cout << "c_ba : " << c_ba << std::endl;
+    check_print(print_latex_to_file("c_ba.tex", c_ba));
+    std::cout << "_2xl2x2l_pr  : " << _2xl2x2l_pr  << std::endl;
+    check_print(print_latex_to_file("_2xl2x2l_pr.tex", _2xl2x2l_pr));
+
+    auto coal_2x2X2x2_c_s1x1 = coalesce(_2x2X2x2_c, Step<_1, _1>{});
+    auto coal_2x2X2x2_c_sl1x1lx1 = coalesce(_2x2X2x2_c, Step<Step<X,X>, _1>{});
+    auto coal_2x2X2x2_c_sl1x1lxl1x1l = coalesce(_2x2X2x2_c, Step<Step<X,X>, Step<X,X>>{});
+    // auto coal_2x2X2x2_c_sl1x1lx1 = coalesce(_2x2X2x2_c, Step<Step<_1,_1>, _1>{});
+    // auto coal_b = coalesce(_2x2X2x2_c, Step<Step<_1,_1>, Step<_1,_1>>);
+    std::cout << "coal_a : " << coal_2x2X2x2_c_s1x1  << std::endl;
+    std::cout << "coal_b : " << coal_2x2X2x2_c_sl1x1lx1 << std::endl;
+    std::cout << "coal_c : " << coal_2x2X2x2_c_sl1x1lxl1x1l  << std::endl;
+
+
+
+    // std::cout << "_4x4_c : " << _4x4_c << std::endl;
+    // check_print(print_latex_to_file("_4x4_c.tex", _4x4_c));
+
+    // std::cout << "_4x4_r : " << _4x4_r << std::endl;
+    // check_print(print_latex_to_file("_4x4_r.tex", _4x4_r));
+
+    // std::cout << "_2x2X2x2_c : " << _2x2X2x2_c << std::endl;
+    // check_print(print_latex_to_file("_2x2X2x2_c.tex", _2x2X2x2_c));
+
+    // std::cout << "_2x2X2x2_r : " << _2x2X2x2_r << std::endl;
+    // check_print(print_latex_to_file("_2x2X2x2_r.tex", _2x2X2x2_r));
+
+    // std::cout << "_4x4_p : " << _4x4_p << std::endl;
+    // check_print(print_latex_to_file("_4x4_p.tex", _4x4_p));
+
+    // std::cout << "_4x4_q : " << _4x4_q << std::endl;
+    // check_print(print_latex_to_file("_4x4_q.tex", _4x4_q));
+
+    // std::cout << "_l2x2lx2_c : " << _l2x2lx2_c << std::endl;
+    // check_print(print_latex_to_file("_l2x2lx2_c.tex", _l2x2lx2_c));
+
+    // std::cout << "_l2x2lx2_r : " << _l2x2lx2_r << std::endl;
+    // check_print(print_latex_to_file("_l2x2lx2_r.tex", _l2x2lx2_r));
+
+    // std::cout << "_2xl2x2l_c : " << _2xl2x2l_c << std::endl;
+    // check_print(print_latex_to_file("_2xl2x2l_c.tex", _2xl2x2l_c));
+
+    // std::cout << "_2xl2x2l_r : " << _2xl2x2l_r << std::endl;
+    // check_print(print_latex_to_file("_2xl2x2l_r.tex", _2xl2x2l_r));
+
+    // std::cout << "_l2x2lx2_pc : " << _l2x2lx2_pc << std::endl;
+    // check_print(print_latex_to_file("_l2x2lx2_pc.tex", _l2x2lx2_pc));
+
+    // std::cout << "_2xl2x2l_pc : " << _2xl2x2l_pc << std::endl;
+    // check_print(print_latex_to_file("_2xl2x2l_pc.tex", _2xl2x2l_pc));
+
+
 
 
 
