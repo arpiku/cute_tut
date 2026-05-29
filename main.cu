@@ -12,6 +12,8 @@
 #include <iostream>
 #include <fstream>
 
+#define LOG(x) std::cout << x << std::endl;
+
 using namespace cute;
 
 namespace {
@@ -215,98 +217,29 @@ void set_7() {
 
 
 
+
 int main() {
 
-    // set_7();
+    auto _4x4_c = make_layout(make_shape(_4{}, _4{}), make_stride(_1{}, _4{})); // LayoutLeft()
+    auto _4x4_r = make_layout(make_shape(_4{}, _4{}), make_stride(_4{}, _1{})); // LayoutRight()
+    auto _2x2_ = make_tuple(_2{}, _2{});
+    auto _2x2X2x2_c = make_layout(make_shape( _2x2_, _2x2_), LayoutLeft()); // LayoutLeft()
+    auto _2x2X2x2_r = make_layout(make_shape( _2x2_, _2x2_), LayoutRight()); // LayoutLeft()
+    auto _4x4_p = make_layout(make_shape(_4{}, _4{}), make_stride(_3{}, _5{}));
+    auto _4x4_q = make_layout(make_shape(_4{}, _4{}), make_stride(Int<11>{}, Int<7>{}));
 
-   auto shape = make_shape(make_shape(_4{},_8{}), _2{});
+    auto _l2x2lx2_c = make_layout(make_shape(_2x2_, _2{}), LayoutLeft());
+    auto _l2x2lx2_r = make_layout(make_shape(_2x2_, _2{}), LayoutRight());
 
-   // auto shape2 = make_shape(Int<20>{});
-   auto stride = make_stride(make_stride(_16{}, _1{}), _8{});
-   auto layout = make_layout(shape, stride);
+    auto _2xl2x2l_c = make_layout(make_shape( _2{}, _2x2_), LayoutLeft());
+    auto _2xl2x2l_r = make_layout(make_shape( _2{}, _2x2_), LayoutRight());
 
-   // Ampere
-   auto ALayout = Layout<Shape <Shape < _4,_8>,Shape <_2>>,
-                            Stride<Stride<_16,_1>,Stride<_8>>>{};
-
-   std::cout << "Reg ALayout = "  << ALayout << "\n";
-   print_latex_to_file("Ampere_example.tex", ALayout);
-   std::cout << crd2idx(make_coord(0,1), ALayout) << "\n";
-   std::cout << crd2idx(make_coord(31,0), ALayout) << "\n";
-   std::cout << crd2idx(make_coord(31,1), ALayout) << "\n";
-   std::cout << crd2idx(make_coord(28,1), ALayout) << "\n";
-
-   auto x = make_identity_layout(Shape <_16, _4>{});
-   std::cout << "x = " << x << "\n";
-   auto zx = composition(ALayout, x);
-   auto xz = composition(x, ALayout);
-   std::cout << "zx = " << zx << "\n";
-   std::cout << "xz = " << xz << "\n";
+    auto _l2x2lx2_pc = make_layout(make_shape(_2x2_, _2{}), make_stride(make_tuple(_3{}, _5{}), Int<7>{}));
+    auto _2xl2x2l_pc = make_layout(make_shape( _2{}, _2x2_), make_stride(_3{}, make_tuple(_5{}, Int<7>{})));
 
 
-   std::cout << crd2idx(make_coord(0,1), xz) << "\n";
-   std::cout << crd2idx(make_coord(31,0), xz) << "\n";
-   std::cout << crd2idx(make_coord(31,1), xz) << "\n";
-
-
-   // auto shapex0 = make_shape<_20{}>; // This doesn't
-   // auto shape = make_shape(make_shape(_4{},_8{}), _2{}); // This works
-   //
-
-   auto shapex0 = make_shape(Int<20>{});
-   auto stridex0 = make_stride(Int<2>{});
-
-
-   auto shapey0 = make_shape(Int<5>{}, Int<4>{});
-   auto stridey0 = make_stride(Int<4>{}, Int<1>{});
-
-   auto l1 = make_layout(shapex0, stridex0);
-   auto l2 = make_layout(shapey0, stridey0);
-
-   std::cout << "Layout l1 = "  << l1 << "\n";
-   std::cout << "Layout l2 = "  << l2 << "\n";
-
-   auto l1_l2 = composition(l1, l2);
-
-   std::cout << "Layout l1_l2 = "  << l1_l2 << "\n";
-
-   auto s0 = make_shape(Int<4>{}, make_shape(Int<3>{}, Int<2>{}));
-   // auto d0 = make_stride(Int<4>{}, make_stride(Int<3>{}, Int<1>{}));
-   auto lc = make_layout(s0, LayoutLeft());
-   auto lr = make_layout(s0, LayoutRight());
-
-
-   std::cout << "Layout lc = "  << lc << "\n";
-   std::cout << "Layout lr = "  << lr << "\n";
-   print_latex_to_file("lc.tex", lc);
-   print_latex_to_file("lr.tex", lr);
-
-   for (int i = 0; i < cute::size(lc); ++i) {
-           std::cout << "(idx2crd), lc, lr = " << idx2crd(i, lc) << ", " << idx2crd(i, lr) << "\n";
-
-   }
-
-   for (int i = 0; i < cute::size<0>(s0); ++i) {
-       for (int j = 0; j < cute::size<1>(s0); ++j) {
-           std::cout << "(i,j) = " << i << ", " << j << "\n";
-           std::cout << "(crd2idx), lc, lr = " << crd2idx(make_coord(i,j), lc) << ", " << crd2idx(make_coord(i,j), lr) << "\n";
-   }
-   }
-
-   // std::cout << "crd l1 = "  << crd2idx(1, l1) << "\n";
-   // std::cout << "idx l1 = "  << idx2crd(1, l1) << "\n";
-   // std::cout << "idx l1 = "  << idx2crd(2, l1) << "\n";
-
-   // for (int i = 0; i < 10; ++i) {
-   //     std::cout << "(crd2idx, idx2crd) = " << crd2idx(i, l1) << ", " << idx2crd(i, l1) << "\n";
-   //     std::cout << " (i+1)(crd2idx, idx2crd) = " << crd2idx(i+1, l1) << ", " << idx2crd(i+1 l1) << "\n";
-   // }
-
-   // std::cout << crd2idx(make_coord(0,2), l1_l2) << "\n";
-   // std::cout << crd2idx(make_coord(0,2), l2) << "\n";
-   // std::cout << crd2idx(make_coord(1,0), l1_l2) << "\n";
-   // std::cout << crd2idx(make_coord(1,0), l2) << "\n";
-
+    std::cout << "_4x4_c : " << _4x4_c << std::endl;
+    check_print(print_latex_to_file("_4x4_c.tex", _4x4_c));
 
 
 
